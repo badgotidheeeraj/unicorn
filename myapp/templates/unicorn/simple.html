@@ -1,0 +1,105 @@
+<div>
+  <!-- <div></div> -->
+  <form class="d-flex m-1" unicorn:submit.prevent="save_book">
+    <input
+      required
+      class="form-control m-2"
+      placeholder="Name"
+      unicorn:model.defer="title"
+      unicorn:keyup.escape="title=''"
+      type="text"
+      id="title"
+    />
+    <input
+      required
+      class="form-control m-2"
+      placeholder="Company"
+      unicorn:model.defer="compony"
+      unicorn:keyup.escape="compony=''"
+      type="text"
+      id="compony"
+    />
+    <input
+      required
+      class="form-control m-2"
+      placeholder="Address"
+      unicorn:model.defer="address"
+      unicorn:keyup.escape="address=''"
+      type="text"
+      id="address"
+    />
+    <input
+      required
+      class="form-control m-2"
+      placeholder="Pin"
+      unicorn:model.defer="pin"
+      unicorn:keyup.escape="pin=''"
+      type="text"
+      id="pin"
+    />
+  </form>
+  <div class="d-flex">
+    <button
+      class="m-2 form-control btn btn-success"
+      unicorn:click="save_book"
+      unicorn:loading.class.remove="active"
+    >
+      Save book
+    </button>
+  </div>
+  <!-- table -->
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border: 1px solid chartreuse; /* Border color */
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: chartreuse; /* Header background color */
+      color: white; /* Header text color */
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2; /* Alternate row background color */
+    }
+  </style>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Company</th>
+      <th>Address</th>
+      <th>Pin</th>
+      <th>Action</th>
+    </tr>
+    {% for i in practis %}
+    <tr>
+      <td>{{ i.name|title }}</td>
+      <td>{{ i.compony|title }}</td>
+      <td>{{ i.address|title }}</td>
+      <td>{{ i.pin }}</td>
+      <td>
+        <button
+          class="form-control btn btn-outline-danger"
+          unicorn:click="delete({ 'pk': '{{ i.id }}'})"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+
+    {% endfor %}
+  </table>
+</div>
+
+<!-- <input type="text"
+      unicorn:model.defer="task"
+      unicorn:keyup.escape="task=''"
+      placeholder="New task" id="task"></input> -->
